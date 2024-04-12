@@ -137,17 +137,18 @@ class RecipeApp
             return;
         }
 
-        Console.WriteLine("______________________________________________");
-        
+        Console.WriteLine("----------------------------------------------");
+        Console.WriteLine("Recipe Details");
+        Console.WriteLine("----------------------------------------------");
         // Display Recipe name
         Console.WriteLine("\nName:" + recipe.name);
 
         // Display ingredients name, quantity and unit with numbering
         Console.WriteLine("\nIngredients:\n");
-        Console.WriteLine("{0, -2} {1, -10} {2, -10} {3, -10}","No.", "Name", "Quantity", "Unit");
+        Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}","No.", "Name", "Quantity", "Unit");
         for (int i = 0; i < recipe.ingredients.Length; i++)
         {
-            Console.WriteLine("{0, -2} {1, -10} {2, -10} {3, -10}", (i+ 1), recipe.ingredients[i].name, recipe.ingredients[i].quantity, recipe.ingredients[i].unit);
+            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}", (i+ 1), recipe.ingredients[i].name, recipe.ingredients[i].quantity * ratio, recipe.ingredients[i].unit);
         }
 
         // Display steps with numbering
@@ -159,6 +160,7 @@ class RecipeApp
         Console.WriteLine("----------------------------------------------");
     }
 
+    // Method to change the recipe scale
     public void ScaleRecipe()
     {
         Console.WriteLine("Scale Menu:");
@@ -170,7 +172,7 @@ class RecipeApp
         // Prompt user to enter new scale value
         Console.Write("Enter your choice: ");
         string choice = Console.ReadLine();
-        
+        Console.WriteLine("");
         switch(choice)
         {
             case "A":
@@ -190,6 +192,16 @@ class RecipeApp
         // Notify user that the scale has been updated
         Console.WriteLine("Recipe scale updated");
 
+    }
+
+    // Method to remove the recipe
+    public void RemoveRecipe()
+    {
+        // Remove the recipe
+        recipe = null;
+
+        // Notify user that recipe has been removed
+        Console.WriteLine("Recipe removed successful!");
     }
 }
 
@@ -217,8 +229,8 @@ class Program
             //Read user choice from input
             Console.Write("Enter your choice: ");
             choice = Console.ReadLine();
-
-            switch(choice)
+            Console.WriteLine("");
+            switch (choice)
             {
                 case "1":
                     // Call Add Recipe method when user chooses option 1
@@ -238,6 +250,7 @@ class Program
                 case "4":
                     // Call RemoveRecipe method when user chooses option 4
 
+                    recipeApp.RemoveRecipe();
                     break;
                 case "5":
                     // Exit the program when the user chooses option 5
