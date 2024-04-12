@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Linq.Expressions;
+using System.Xml.Linq;
 
 // Ingredient class representing an ingredient with name, measurement, and unit
 class Ingredient
@@ -34,11 +35,119 @@ class Recipe
     }
 }
 
+// RecipeApp class managing the recipe application
+class RecipeApp
+{
+    // Object to store the current Recipe
+    private Recipe recipe;
+
+    // Constructor to initialize RecipeApp
+    public RecipeApp()
+    {
+        recipe = null;
+    }
+
+    // Method to add a recipe
+    public void AddRecipe()
+    {
+        // Prompt user to enter recipe name
+        Console.WriteLine("Enter Recipe Details:");
+
+        // Prompt user to enter recipe name
+        Console.Write("Name: ");
+        string name = Console.ReadLine();
+
+        // Prompt user to enter number of ingredient
+        Console.Write("Number of Ingredients: ");
+        int numIngredients = int.Parse(Console.ReadLine());
+
+        // Create an array to store ingredients
+        Ingredient[] ingredients = new Ingredient[numIngredients];
+
+        for(int i = 0; i < numIngredients; i++)
+        {
+            // Prompt user to enter details for ingredient
+            Console.WriteLine("\nEnter details for Ingredient " + (i + 1));
+            
+            // Prompt user to enter ingredient name
+            Console.Write("Name: ");
+            string ingredientName = Console.ReadLine();
+
+            // Prompt user to enter ingredient quantity
+            Console.Write("Quantity: ");
+            float quantity = float.Parse(Console.ReadLine());
+
+            // Prompt user to enter ingredient unit
+            Console.Write("Unit: ");
+            string unit = Console.ReadLine();
+
+            // Create and add new Ingredient object to the array
+            ingredients[i] = new Ingredient(ingredientName, quantity, unit);
+        }
+
+        // Prompt user to enter number of steps
+        Console.Write("\nNumber of Steps: ");
+        int numSteps = int.Parse(Console.ReadLine());
+
+        // Create an array to store steps
+        string[] steps = new string[numSteps];
+
+        // Prompt user to enter recipe instruction steps
+        Console.WriteLine("Enter the instruction steps");
+        for(int i = 0; i < numSteps; i++)
+        {
+            Console.Write(i + 1 + ": ");
+            steps[i] = Console.ReadLine();
+        }
+
+        // Create a new Recipe object with capture deails
+        recipe = new Recipe(name, ingredients, steps);
+
+        // Notify user that recipe has been added
+    }
+
+    // Method to view the current recipe
+    public void ViewRecipe()
+    {
+        if(recipe == null)
+        {
+            // Notify user if no recipe is available
+            Console.WriteLine("No recipe available");
+            return;
+        }
+
+        Console.WriteLine("______________________________________________");
+        
+        // Display Recipe name
+        Console.WriteLine("\nName:" + recipe.name);
+
+        // Display ingredients name, quantity and unit with numbering
+        Console.WriteLine("\nIngredients:\n");
+        Console.WriteLine("{0, -2} {1, -10} {2, -10} {3, -10}","No.", "Name", "Quantity", "Unit");
+        for (int i = 0; i < recipe.ingredients.Length; i++)
+        {
+            Console.WriteLine("{0, -2} {1, -10} {2, -10} {3, -10}", (i+ 1), recipe.ingredients[i].name, recipe.ingredients[i].quantity, recipe.ingredients[i].unit);
+        }
+
+        // Display steps with numbering
+        Console.WriteLine("\nSteps:\n");
+        for(int i = 0; i< recipe.steps.Length; i++) 
+        {
+            Console.WriteLine(i+1 + ". " + recipe.steps[i]);
+        }
+        Console.WriteLine("----------------------------------------------");
+    }
+}
+
+
 // Main program
 class Program
 {
     static void Main(String[] args)
     {
+        // Create an instance of RecipeApp
+        RecipeApp recipeApp = new RecipeApp();
+        
         // Main loop of the program
         string choice = "";
         while(choice != "5")
@@ -60,10 +169,12 @@ class Program
                 case "1":
                     // Call Add Recipe method when user chooses option 1
 
+                    recipeApp.AddRecipe();
                     break;
                 case "2":
                     // Call ViewRecipe method when user chooses option 2
 
+                    recipeApp.ViewRecipe();
                     break;
                 case "3":
                     // Call ScaleRecipe method when user chooses option 3
