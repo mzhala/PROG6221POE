@@ -1,17 +1,19 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Xml.Linq;
 
-// Ingredient class representing an ingredient with name, measurement, and unit
-class Ingredient
+// Base class representing a food item
+// FoodItem class representing an item with name, quantity, and unit
+class FoodItem
 {
     public string name { get; set; }
     public float quantity { get; set; }
     public string unit { get; set; }
 
     // Constructor for the Ingredient class.
-    public Ingredient(string name, float quantity, string unit)
+    public FoodItem(string name, float quantity, string unit)
     {
         this.name = name;
         this.quantity = quantity;
@@ -19,15 +21,41 @@ class Ingredient
     }
 }
 
+// Derived class representing an ingredient
+class Ingredient : FoodItem
+{
+    public Ingredient(string name, float quantity, string unit) : base(name, quantity, unit) 
+    { 
+    }
+}
+
+// Base class representing an item in a recipe
+class RecipeItem
+{
+    public string description { get; set; }
+
+    public RecipeItem(string description)
+    {
+        this.description = description;
+    }
+}
+
+// Derived class representing a step in a recipe
+class Step : RecipeItem
+{
+    public Step(string description) : base(description) 
+    { 
+    }
+}
 // Recipe class representing a recipe with name, ingredients, and instructions
 class Recipe
 {
     public string name { get; set; }
     public Ingredient[] ingredients { get; set; }
-    public string[] steps { get; set; }
+    public Step[] steps { get; set; }
 
     // Constructor for the Recipe class.
-    public Recipe(string name, Ingredient[] ingredients, string[] steps)
+    public Recipe(string name, Ingredient[] ingredients, Step[] steps)
     {
         this.name = name;
         this.ingredients = ingredients;
@@ -57,12 +85,12 @@ class RecipeApp
             new Ingredient("Salt", 1, "Pinch")
         };
 
-        string[] steps = new string[]
+        Step[] steps = new Step[]
         {
-            "Preheat pan",
-            "In a bowl combine and mix eggs, salt and pepper.",
-            "Pour batter into a greased pan.",
-            "Cook for 3 minutes, or until cooked."
+            new Step("Preheat pan"),
+            new Step("In a bowl combine and mix eggs, salt and pepper."),
+            new Step("Pour batter into a greased pan."),
+            new Step("Cook for 3 minutes, or until cooked.")
         };
         recipe = new Recipe("Scrambled Egg", ingredients, steps);
     }
@@ -159,14 +187,17 @@ class RecipeApp
 
 
         // Create an array to store steps
-        string[] steps = new string[numSteps];
+        Step[] steps = new Step[numSteps];
 
         // Prompt user to enter recipe instruction steps
         Console.WriteLine("Enter the instruction steps");
+        string description = "";
         for(int i = 0; i < numSteps; i++)
         {
             Console.Write(i + 1 + ": ");
-            steps[i] = Console.ReadLine();
+            description = Console.ReadLine();
+
+            steps[i] = new Step(description);
         }
 
         // Create a new Recipe object with capture deails
