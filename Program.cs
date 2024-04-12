@@ -77,10 +77,26 @@ class RecipeApp
         Console.Write("Name: ");
         string name = Console.ReadLine();
 
-        // Prompt user to enter number of ingredient
-        Console.Write("Number of Ingredients: ");
-        int numIngredients = int.Parse(Console.ReadLine());
+        // Declare and initialize numIngredients
+        int numIngredients = 0;
 
+        // Prompt user to enter number of ingredients and validate the input
+        Boolean inputOk = false;
+        while (inputOk == false)
+        {
+            try
+            {
+                // Prompt user to enter number of ingredient
+                Console.Write("Number of Ingredients: ");
+                numIngredients = int.Parse(Console.ReadLine());
+                inputOk = true;
+            }
+            catch 
+            { 
+                Console.WriteLine("Invalid input, Please enter numeric value");
+            }
+        }
+        
         // Create an array to store ingredients
         Ingredient[] ingredients = new Ingredient[numIngredients];
 
@@ -93,9 +109,25 @@ class RecipeApp
             Console.Write("Name: ");
             string ingredientName = Console.ReadLine();
 
-            // Prompt user to enter ingredient quantity
-            Console.Write("Quantity: ");
-            float quantity = float.Parse(Console.ReadLine());
+            // Declare and initialize ingredient quantity
+            float quantity = 0;
+
+            // Prompt user to enter quantity of ingredient and validate the input
+            inputOk = false;
+            while (inputOk == false)
+            {
+                try
+                {
+                    // Prompt user to enter ingredient quantity
+                    Console.Write("Quantity: ");
+                    quantity = float.Parse(Console.ReadLine());
+                    inputOk = true;
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input, Please enter numeric value");
+                }
+            }
 
             // Prompt user to enter ingredient unit
             Console.Write("Unit: ");
@@ -105,9 +137,26 @@ class RecipeApp
             ingredients[i] = new Ingredient(ingredientName, quantity, unit);
         }
 
-        // Prompt user to enter number of steps
-        Console.Write("\nNumber of Steps: ");
-        int numSteps = int.Parse(Console.ReadLine());
+        // Declare and initialize number of steps
+        int numSteps = 0;
+
+        // Prompt user to enter int numSteps and validate the input
+        inputOk = false;
+        while (inputOk == false)
+        {
+            try
+            {
+                // Prompt user to enter number of steps
+                Console.Write("\nNumber of Steps: ");
+                numSteps = int.Parse(Console.ReadLine());
+                inputOk = true;
+            }
+            catch
+            {
+                Console.WriteLine("Invalid input, Please enter numeric value");
+            }
+        }
+
 
         // Create an array to store steps
         string[] steps = new string[numSteps];
@@ -173,7 +222,7 @@ class RecipeApp
         Console.Write("Enter your choice: ");
         string choice = Console.ReadLine();
         Console.WriteLine("");
-        switch(choice)
+        switch(choice.ToUpper())
         {
             case "A":
                 ratio = 0.5;
@@ -187,10 +236,12 @@ class RecipeApp
             case "D":
                 ratio = 1;
                 break;
-            
+            default:
+                Console.WriteLine("Invalid Choice!");
+                return;
         }
         // Notify user that the scale has been updated
-        Console.WriteLine("Recipe scale updated");
+        Console.WriteLine("Recipe scale updated!");
 
     }
 
@@ -201,7 +252,7 @@ class RecipeApp
         recipe = null;
 
         // Notify user that recipe has been removed
-        Console.WriteLine("Recipe removed successful!");
+        Console.WriteLine("Recipe removed successfully!");
     }
 }
 
