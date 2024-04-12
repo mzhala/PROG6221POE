@@ -3,18 +3,12 @@
 // Base class representing an item in a recipe
 public class RecipeItem
 {
-    public string Description { get; set; }
+    public string description { get; set; }
 
     // Constructor for the RecipeItem class.
     public RecipeItem(string description)
     {
-        Description = description;
+        this.description = description;
     }
 }
 
-// Derived class representing a step in a recipe
-public class Step : RecipeItem
-{
-    // Constructor for the Step class.
-    public Step(string description) : base(description) { }
-}

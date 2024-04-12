@@ -1,23 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
-// RecipeApp class managing the recipe application
 public class RecipeApp
 {
-    // Object to store the current Recipe
-    private Recipe recipe;
-
-    // Ratio value with default value 1
-    double ratio = 1;
+    // List to store multiple recipes
+    private List<Recipe> recipes;
+    private double ratio = 1;
 
     // Constructor to initialize RecipeApp
     public RecipeApp()
     {
-        // Initialize recipe with a simple default recipe
+        // Initialize the list of recipes
+        recipes = new List<Recipe>();
+
+        // Example: Adding a default recipe
         Ingredient[] ingredients = new Ingredient[]
         {
-            new Ingredient("Egg", 1, "units"),
+            new Ingredient("Egg", 1, "large"),
             new Ingredient("Butter", 1, "Teaspoon"),
-            new Ingredient("Pepper", 1, "units"),
+            new Ingredient("Pepper", 1, "Teaspoon"),
             new Ingredient("Salt", 1, "Pinch")
         };
 
@@ -28,69 +30,52 @@ public class RecipeApp
             new Step("Pour batter into a greased pan."),
             new Step("Cook for 3 minutes, or until cooked.")
         };
-        recipe = new Recipe("Scrambled Egg", ingredients, steps);
+        Recipe defaultRecipe = new Recipe("Scrambled Egg", ingredients, steps);
+        recipes.Add(defaultRecipe);
     }
 
     // Method to add a recipe
     public void AddRecipe()
     {
-        // Prompt user to enter recipe name
+        // Prompt user to enter recipe details
         Console.WriteLine("Enter Recipe Details:");
 
         // Prompt user to enter recipe name
         Console.Write("Name: ");
         string name = Console.ReadLine();
 
-        // Declare and initialize numIngredients
-        int numIngredients = 0;
-
         // Prompt user to enter number of ingredients and validate the input
-        Boolean inputOk = false;
-        while (inputOk == false)
+        int numIngredients;
+        while (true)
         {
-            try
-            {
-                // Prompt user to enter number of ingredient
-                Console.Write("Number of Ingredients: ");
-                numIngredients = int.Parse(Console.ReadLine());
-                inputOk = true;
-            }
-            catch
-            {
-                Console.WriteLine("Invalid input, Please enter numeric value");
-            }
+            Console.Write("Number of Ingredients: ");
+            if (int.TryParse(Console.ReadLine(), out numIngredients) && numIngredients > 0)
+                break;
+            else
+                Console.WriteLine("Invalid input. Please enter a valid number.");
         }
 
         // Create an array to store ingredients
         Ingredient[] ingredients = new Ingredient[numIngredients];
 
+        // Prompt user to enter ingredient details
         for (int i = 0; i < numIngredients; i++)
         {
-            // Prompt user to enter details for ingredient
-            Console.WriteLine("\nEnter details for Ingredient " + (i + 1));
+            Console.WriteLine($"\nEnter details for Ingredient {i + 1}");
 
             // Prompt user to enter ingredient name
             Console.Write("Name: ");
             string ingredientName = Console.ReadLine();
 
-            // Declare and initialize ingredient quantity
-            float quantity = 0;
-
-            // Prompt user to enter quantity of ingredient and validate the input
-            inputOk = false;
-            while (inputOk == false)
+            // Prompt user to enter ingredient quantity
+            float quantity;
+            while (true)
             {
-                try
-                {
-                    // Prompt user to enter ingredient quantity
-                    Console.Write("Quantity: ");
-                    quantity = float.Parse(Console.ReadLine());
-                    inputOk = true;
-                }
-                catch
-                {
-                    Console.WriteLine("Invalid input, Please enter numeric value");
-                }
+                Console.Write("Quantity: ");
+                if (float.TryParse(Console.ReadLine(), out quantity) && quantity > 0)
+                    break;
+                else
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
             }
 
             // Prompt user to enter ingredient unit
@@ -101,79 +86,95 @@ public class RecipeApp
             ingredients[i] = new Ingredient(ingredientName, quantity, unit);
         }
 
-        // Declare and initialize number of steps
-        int numSteps = 0;
-
-        // Prompt user to enter int numSteps and validate the input
-        inputOk = false;
-        while (inputOk == false)
+        // Prompt user to enter number of steps and validate the input
+        int numSteps;
+        while (true)
         {
-            try
-            {
-                // Prompt user to enter number of steps
-                Console.Write("\nNumber of Steps: ");
-                numSteps = int.Parse(Console.ReadLine());
-                inputOk = true;
-            }
-            catch
-            {
-                Console.WriteLine("Invalid input, Please enter numeric value");
-            }
+            Console.Write("\nNumber of Steps: ");
+            if (int.TryParse(Console.ReadLine(), out numSteps) && numSteps > 0)
+                break;
+            else
+                Console.WriteLine("Invalid input. Please enter a valid number.");
         }
-
 
         // Create an array to store steps
         Step[] steps = new Step[numSteps];
 
         // Prompt user to enter recipe instruction steps
         Console.WriteLine("Enter the instruction steps");
-        string description = "";
         for (int i = 0; i < numSteps; i++)
         {
-            Console.Write(i + 1 + ": ");
-            description = Console.ReadLine();
-
+            Console.Write($"{i + 1}: ");
+            string description = Console.ReadLine();
             steps[i] = new Step(description);
         }
 
-        // Create a new Recipe object with capture details
-        recipe = new Recipe(name, ingredients, steps);
+        // Create a new Recipe object and add it to the list of recipes
+        Recipe newRecipe = new Recipe(name, ingredients, steps);
+        recipes.Add(newRecipe);
 
-        // Notify user that recipe has been added
+        // Notify user that the recipe has been added
         Console.WriteLine("Recipe added successfully!");
     }
 
-    // Method to view the current recipe
-    public void ViewRecipe()
+    // Method to view recipes
+    public void ViewRecipes()
     {
-        if (recipe == null)
+        if (recipes.Count == 0)
         {
-            // Notify user if no recipe is available
-            Console.WriteLine("No recipe available");
+            Console.WriteLine("No recipes available");
             return;
         }
 
+        Console.WriteLine("Recipes:");
+        for (int k = 0; k < recipes.Count; k++)
+        {
+            Console.WriteLine($"{k + 1}. {recipes[k].name}");
+        }
+
+        // Prompt user to enter recipe to view
+        Boolean inputOk = false;
+        int i = 0;
+        while (inputOk == false)
+        {
+            try
+            {
+                // Prompt user to enter number recipe
+                Console.Write("\nEnter the number corresponding to the recipe to view: ");
+                i = int.Parse(Console.ReadLine());
+                if (i > 0 && i <= recipes.Count)
+                    inputOk = true;
+                else
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            catch
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        
+        }
+        i -= 1;
         Console.WriteLine("----------------------------------------------");
-        Console.WriteLine("Recipe Details");
-        Console.WriteLine("----------------------------------------------");
+        Console.WriteLine("Recipe Details\n");
         // Display Recipe name
-        Console.WriteLine("\nName:" + recipe.Name);
+        Console.WriteLine("Name:" + recipes[i].name);
 
         // Display ingredients name, quantity and unit with numbering
-        Console.WriteLine("\nIngredients:\n");
+        Console.WriteLine("\nIngredients:");
         Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}", "No.", "Name", "Quantity", "Unit");
-        for (int i = 0; i < recipe.Ingredients.Length; i++)
+        for (int k = 0; k < recipes[i].ingredients.Length; k++)
         {
-            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}", (i + 1), recipe.Ingredients[i].Name, recipe.Ingredients[i].Quantity * ratio, recipe.Ingredients[i].Unit);
+            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}", (k + 1), recipes[i].ingredients[k].name, recipes[i].ingredients[k].quantity * ratio, recipes[i].ingredients[k].unit);
         }
 
         // Display steps with numbering
-        Console.WriteLine("\nSteps:\n");
-        for (int i = 0; i < recipe.Steps.Length; i++)
+        Console.WriteLine("\nSteps:");
+        for (int k = 0; k < recipes[i].steps.Length; k++)
         {
-            Console.WriteLine(i + 1 + ". " + recipe.Steps[i].Description);
+            Console.WriteLine(k + 1 + ". " + recipes[i].steps[k].description);
         }
         Console.WriteLine("----------------------------------------------");
+
     }
 
     // Method to change the recipe scale
@@ -215,10 +216,35 @@ public class RecipeApp
     // Method to remove the recipe
     public void RemoveRecipe()
     {
-        // Remove the recipe
-        recipe = null;
+        if (recipes.Count == 0)
+        {
+            Console.WriteLine("No recipes available to remove.");
+            return;
+        }
 
-        // Notify user that recipe has been removed
-        Console.WriteLine("Recipe removed successfully!");
+        // Display the list of recipes to the user
+        Console.WriteLine("Select a recipe to remove:");
+        for (int i = 0; i < recipes.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {recipes[i].name}");
+        }
+
+        // Prompt the user to enter the index of the recipe to remove
+        int index;
+        while (true)
+        {
+            Console.Write("Enter the number corresponding to the recipe to remove: ");
+            if (int.TryParse(Console.ReadLine(), out index) && index > 0 && index <= recipes.Count)
+                break;
+            else
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+
+        // Remove the selected recipe from the list
+        Recipe removedRecipe = recipes[index - 1];
+        recipes.RemoveAt(index - 1);
+
+        // Notify the user that the recipe has been removed
+        Console.WriteLine($"Recipe '{removedRecipe.name}' removed successfully!");
     }
 }
