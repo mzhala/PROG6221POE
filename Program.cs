@@ -44,7 +44,25 @@ class RecipeApp
     // Constructor to initialize RecipeApp
     public RecipeApp()
     {
-        recipe = null;
+        //recipe = null;
+
+        // Initialize recipe with a simple default recipe
+        Ingredient[] ingredients = new Ingredient[]
+        {
+            new Ingredient("Egg", 1, "units"),
+            new Ingredient("Butter", 1, "Teaspoon"),
+            new Ingredient("Pepper", 1, "units"),
+            new Ingredient("Salt", 1, "Pinch")
+        };
+
+        string[] steps = new string[]
+        {
+            "Preheat pan",
+            "In a bowl combine and mix eggs, salt and pepper.",
+            "Pour batter into a greased pan.",
+            "Cook for 3 minutes, or until cooked."
+        };
+        recipe = new Recipe("Scrambled Egg", ingredients, steps);
     }
 
     // Method to add a recipe
