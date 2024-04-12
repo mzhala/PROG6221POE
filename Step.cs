@@ -1,8 +1,11 @@
 ﻿using System;
 
 // Derived class representing a step in a recipe
-public class Step : RecipeItem
+namespace PROG6221POE
 {
-    // Constructor for the Step class.
-    public Step(string description) : base(description) { }
+    public class Step : RecipeItem
+    {
+        // Constructor for the Step class.
+        public Step(string description) : base(description) { }
+    }
 }

@@ -1,18 +1,20 @@
 ﻿using System;
 
 // Base class representing a food item
-public class FoodItem
+namespace PROG6221POE
 {
-    public string name { get; set; }
-    public float quantity { get; set; }
-    public string unit { get; set; }
-
-    // Constructor for the FoodItem class.
-    public FoodItem(string name, float quantity, string unit)
+    public class FoodItem
     {
-        this.name = name;
-        this.quantity = quantity;
-        this.unit = unit;
+        public string name { get; set; }
+        public float quantity { get; set; }
+        public string unit { get; set; }
+
+        // Constructor for the FoodItem class.
+        public FoodItem(string name, float quantity, string unit)
+        {
+            this.name = name;
+            this.quantity = quantity;
+            this.unit = unit;
+        }
     }
 }
-

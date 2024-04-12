@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         // Create an instance of RecipeApp
-        RecipeApp recipeApp = new RecipeApp();
+        PROG6221POE.RecipeApp recipeApp = new PROG6221POE.RecipeApp();
 
         // Main loop of the program
         string choice = "";
