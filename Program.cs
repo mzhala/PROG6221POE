@@ -40,7 +40,9 @@ class RecipeApp
 {
     // Object to store the current Recipe
     private Recipe recipe;
-
+    
+    // Ratio value with default value 1
+    double ratio = 1;
     // Constructor to initialize RecipeApp
     public RecipeApp()
     {
@@ -122,6 +124,7 @@ class RecipeApp
         recipe = new Recipe(name, ingredients, steps);
 
         // Notify user that recipe has been added
+        Console.WriteLine("Recipe added successfully!");
     }
 
     // Method to view the current recipe
@@ -154,6 +157,39 @@ class RecipeApp
             Console.WriteLine(i+1 + ". " + recipe.steps[i]);
         }
         Console.WriteLine("----------------------------------------------");
+    }
+
+    public void ScaleRecipe()
+    {
+        Console.WriteLine("Scale Menu:");
+        Console.WriteLine("A. 1/2 Half");
+        Console.WriteLine("B. 2 Double");
+        Console.WriteLine("C. 3 Triple");
+        Console.WriteLine("D. Reset Scale");
+
+        // Prompt user to enter new scale value
+        Console.Write("Enter your choice: ");
+        string choice = Console.ReadLine();
+        
+        switch(choice)
+        {
+            case "A":
+                ratio = 0.5;
+                break;
+            case "B":
+                ratio = 2;
+                break;
+            case "C":
+                ratio = 3;
+                break;
+            case "D":
+                ratio = 1;
+                break;
+            
+        }
+        // Notify user that the scale has been updated
+        Console.WriteLine("Recipe scale updated");
+
     }
 }
 
@@ -196,7 +232,8 @@ class Program
                     break;
                 case "3":
                     // Call ScaleRecipe method when user chooses option 3
-                    
+
+                    recipeApp.ScaleRecipe();
                     break;
                 case "4":
                     // Call RemoveRecipe method when user chooses option 4
