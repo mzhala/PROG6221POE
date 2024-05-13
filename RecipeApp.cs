@@ -155,8 +155,10 @@ namespace PROG6221POE
 
             }
             i -= 1;
-            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine("----------------------------------------------");      
+
             Console.WriteLine("Recipe Details\n");
+
             // Display Recipe name
             Console.WriteLine("Name:" + recipes[i].name);
 

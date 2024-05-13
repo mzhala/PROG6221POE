@@ -11,18 +11,36 @@ class Program
         string choice = "";
         while (choice != "5")
         {
+            // Set the Foreground color to DarkMagenta 
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("-----------------------------");
+            // Reset the Foreground color to white 
+            Console.ForegroundColor = ConsoleColor.White;
+
             // Display menu options
-            Console.WriteLine("\nDine.Me Menu");
+            Console.WriteLine("Dine.Me Menu");
+            // Set the Foreground color to DarkMagenta 
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("-----------------------------");
+            // Reset the Foreground color to white 
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("1. Add Recipe");
             Console.WriteLine("2. View Recipes");
             Console.WriteLine("3. Scale Recipe");
             Console.WriteLine("4. Remove Recipe");
             Console.WriteLine("5. Exit");
 
+            // Set the Foreground color to DarkMagenta 
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             //Read user choice from input
+            Console.WriteLine("_____________________________");
             Console.Write("Enter your choice: ");
             choice = Console.ReadLine();
-            Console.WriteLine("");
+            //Console.WriteLine("");
+            Console.WriteLine("-----------------------------");
+            // Reset the Foreground color to white 
+            Console.ForegroundColor = ConsoleColor.White;
+            
             switch (choice)
             {
                 case "1":
