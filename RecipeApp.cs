@@ -8,7 +8,7 @@ namespace PROG6221POE
     {
         private List<Recipe> recipes;
         private double ratio = 1;
-        private FoodGroup foodGroup;
+        FoodGroups foodGroups = new FoodGroups();
         public RecipeApp()
         {
             recipes = new List<Recipe>();
@@ -164,10 +164,10 @@ namespace PROG6221POE
             Console.WriteLine("Name:" + recipes[i].Name);
 
             Console.WriteLine("\nIngredients:");
-            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -10} {5, -10}", "No.", "Name", "Quantity", "Unit", "Food Group", "Calorie Count");
+            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -15} {5, -15}", "No.", "Name", "Quantity", "Unit", "Calorie Count", "Food Group");
             foreach (var ingredient in recipes[i].Ingredients)
             {
-                Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10}", (recipes[i].Ingredients.IndexOf(ingredient) + 1), ingredient.Name, ingredient.Quantity * ratio, ingredient.Unit);
+                Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -15 } {5, -15}", (recipes[i].Ingredients.IndexOf(ingredient) + 1), ingredient.Name, ingredient.Quantity * ratio, ingredient.Unit, ingredient.CalorieCount, foodGroups.GetFoodGroupName(ingredient.FoodGroupIndex));
             }
 
             Console.WriteLine("\nSteps:");
