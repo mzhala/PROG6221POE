@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PROG6221POE", "PROG6221POE.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BC1122C-7209-475E-A307-4718D4068FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROG6221POE.nUnitTests", "..\PROG6221POE.nUnitTests\PROG6221POE.nUnitTests.csproj", "{9B755A92-2DC4-4866-85A4-926D74945BD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{4C5DD679-F02B-43CE-90A3-5D827F1F810A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C5DD679-F02B-43CE-90A3-5D827F1F810A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C5DD679-F02B-43CE-90A3-5D827F1F810A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B755A92-2DC4-4866-85A4-926D74945BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B755A92-2DC4-4866-85A4-926D74945BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B755A92-2DC4-4866-85A4-926D74945BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B755A92-2DC4-4866-85A4-926D74945BD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
