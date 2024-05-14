@@ -57,9 +57,9 @@ namespace PROG6221POE
         // Method to display names of all food groups
         public void DisplayFoodGroupNames()
         {
-            foreach (var group in groups)
+            for (int i = 0; i < groups.Count; i++)
             {
-                Console.WriteLine(group.Name);
+                Console.WriteLine($"{i + 1}. {groups[i].Name}");
             }
         }
 
@@ -99,11 +99,13 @@ namespace PROG6221POE
         // Method to display details of all food groups
         public void DisplayAllFoodGroupDetails()
         {
-            foreach (var group in groups)
+            for (int i = 0; i < groups.Count; i++)
             {
-                Console.WriteLine($"Food Group Name: {group.Name}");
-                Console.WriteLine($"Description: {group.Description}");
-                Console.WriteLine("Examples:");
+                var group = groups[i];
+                Console.WriteLine($"Food Group {i + 1}:");
+                Console.WriteLine($"Name: {group.Name}");
+                Console.WriteLine($"\nDescription: {group.Description}");
+                Console.WriteLine("\nExamples:");
                 foreach (var example in group.Examples)
                 {
                     Console.WriteLine($"- {example}");

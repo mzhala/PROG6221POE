@@ -93,7 +93,32 @@ namespace PROG6221POE
                 Console.Write("Unit: ");
                 string unit = Console.ReadLine();
 
-                ingredients.Add(new Ingredient(ingredientName, quantity, unit, 0, 0));
+                int calorie;
+                while (true)
+                {
+                    Console.Write("Calorie Count: ");
+                    if (int.TryParse(Console.ReadLine(), out calorie) && calorie > 0)
+                        break;
+                    else
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+
+                int foodGroupIndex;
+                while (true)
+                {
+                    Console.WriteLine("\nFood Groups:\n");
+                    foodGroups.DisplayFoodGroupNames();
+                    Console.WriteLine("8. Learn More");
+                    Console.Write("\nFood Group No. : ");
+                    if (int.TryParse(Console.ReadLine(), out foodGroupIndex) && foodGroupIndex > 0 && foodGroupIndex < 9)
+                        if (foodGroupIndex == 8)
+                            foodGroups.DisplayAllFoodGroupDetails();
+                        else
+                            break;
+                    else
+                        Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+                ingredients.Add(new Ingredient(ingredientName, quantity, unit, calorie, foodGroupIndex));
             }
 
             int numSteps;
