@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG6221POE;
+using System;
 
 class Program
 {
@@ -6,6 +7,9 @@ class Program
     {
         // Create an instance of RecipeApp
         PROG6221POE.RecipeApp recipeApp = new PROG6221POE.RecipeApp();
+
+        // Create an object of FoodGroups
+        FoodGroups foodGroups = new FoodGroups();
 
         // Main loop of the program
         string choice = "";
@@ -28,7 +32,8 @@ class Program
             Console.WriteLine("2. View Recipes");
             Console.WriteLine("3. Scale Recipe");
             Console.WriteLine("4. Remove Recipe");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("5. Food Group Details");
+            Console.WriteLine("6. Exit");
 
             // Set the Foreground color to DarkMagenta 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -60,6 +65,10 @@ class Program
                     recipeApp.RemoveRecipe();
                     break;
                 case "5":
+                    // Call RemoveRecipe method when user chooses option 4
+                    foodGroups.DisplayAllFoodGroupDetails();
+                    break;
+                case "6":
                     // Exit the program when the user chooses option 5
                     Environment.Exit(0);
                     break;
