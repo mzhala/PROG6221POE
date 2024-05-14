@@ -31,6 +31,28 @@ namespace PROG6221POE
             };
             Recipe defaultRecipe = new Recipe("Scrambled Egg", ingredients, steps);
             recipes.Add(defaultRecipe);
+
+            // Example: Adding a default recipe
+            List<Ingredient> ingredients2 = new List<Ingredient>
+            {
+                new Ingredient("Egg", 1, "large"),
+                new Ingredient("Butter", 1, "Teaspoon"),
+                new Ingredient("Pepper", 1, "Teaspoon"),
+                new Ingredient("Salt", 1, "Pinch"),
+                new Ingredient("Onion", 1, "large")
+            };
+
+            List<Step> steps2 = new List<Step>
+            {
+                new Step("Preheat pan"),
+                new Step("In a bowl combine and mix eggs, salt and pepper."),
+                new Step("Pour chopped onion into a greased pan."),
+                new Step("Pour batter into into the fried onion."),
+                new Step("Cook for 3 minutes, or until cooked.")
+            };
+            Recipe defaultRecipe2 = new Recipe("Egg and Onion Fiesta", ingredients2, steps2);
+            recipes.Add(defaultRecipe2);
+
         }
 
         public void AddRecipe()
@@ -107,6 +129,9 @@ namespace PROG6221POE
                 return;
             }
 
+            // Sort recipes by name
+            SortRecipesByName();
+
             Console.WriteLine("Recipes:");
             for (int k = 0; k < recipes.Count; k++)
             {
@@ -151,8 +176,13 @@ namespace PROG6221POE
                 Console.WriteLine($"{recipes[i].Steps.IndexOf(step) + 1}. {step.Instruction}");
             }
             Console.WriteLine("----------------------------------------------");
-
         }
+
+        private void SortRecipesByName()
+        {
+            recipes.Sort((x, y) => string.Compare(x.Name, y.Name));
+        }
+
 
         public void ScaleRecipe()
         {
