@@ -16,10 +16,10 @@ namespace PROG6221POE
             // Example: Adding a default recipe
             List<Ingredient> ingredients = new List<Ingredient>
             {
-                new Ingredient("Egg", 1, "large"),
-                new Ingredient("Butter", 1, "Teaspoon"),
-                new Ingredient("Pepper", 1, "Teaspoon"),
-                new Ingredient("Salt", 1, "Pinch")
+                new Ingredient("Egg", 1, "large", 0 , 0),
+                new Ingredient("Butter", 1, "Teaspoon", 0 , 0),
+                new Ingredient("Pepper", 1, "Teaspoon", 0 , 0),
+                new Ingredient("Salt", 1, "Pinch", 0, 0)
             };
 
             List<Step> steps = new List<Step>
@@ -35,11 +35,11 @@ namespace PROG6221POE
             // Example: Adding a default recipe
             List<Ingredient> ingredients2 = new List<Ingredient>
             {
-                new Ingredient("Egg", 1, "large"),
-                new Ingredient("Butter", 1, "Teaspoon"),
-                new Ingredient("Pepper", 1, "Teaspoon"),
-                new Ingredient("Salt", 1, "Pinch"),
-                new Ingredient("Onion", 1, "large")
+                new Ingredient("Egg", 1, "large", 0, 0),
+                new Ingredient("Butter", 1, "Teaspoon", 0, 0),
+                new Ingredient("Pepper", 1, "Teaspoon", 0, 0),
+                new Ingredient("Salt", 1, "Pinch", 0, 0),
+                new Ingredient("Onion", 1, "large", 0, 0)
             };
 
             List<Step> steps2 = new List<Step>
@@ -93,7 +93,7 @@ namespace PROG6221POE
                 Console.Write("Unit: ");
                 string unit = Console.ReadLine();
 
-                ingredients.Add(new Ingredient(ingredientName, quantity, unit));
+                ingredients.Add(new Ingredient(ingredientName, quantity, unit, 0, 0));
             }
 
             int numSteps;
