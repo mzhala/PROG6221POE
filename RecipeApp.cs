@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace PROG6221POE
 {
+    public delegate void CalorieExceededHandler();
+
     public class RecipeApp
     {
         private List<Recipe> recipes;
@@ -16,10 +18,10 @@ namespace PROG6221POE
             // Example: Adding a default recipe
             List<Ingredient> ingredients = new List<Ingredient>
             {
-                new Ingredient("Egg", 1, "large", 0 , 0),
-                new Ingredient("Butter", 1, "Teaspoon", 0 , 0),
-                new Ingredient("Pepper", 1, "Teaspoon", 0 , 0),
-                new Ingredient("Salt", 1, "Pinch", 0, 0)
+                new Ingredient("Egg", 1, "large", 140 , 0),
+                new Ingredient("Butter", 1, "Teaspoon", 100 , 1),
+                new Ingredient("Pepper", 1, "Teaspoon", 200 , 5),
+                new Ingredient("Salt", 1, "Pinch", 100, 4)
             };
 
             List<Step> steps = new List<Step>
@@ -118,6 +120,7 @@ namespace PROG6221POE
                     else
                         Console.WriteLine("Invalid input. Please enter a valid number.");
                 }
+
                 ingredients.Add(new Ingredient(ingredientName, quantity, unit, calorie, foodGroupIndex));
             }
 
@@ -195,6 +198,10 @@ namespace PROG6221POE
                 Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -15 } {5, -15}", (recipes[i].Ingredients.IndexOf(ingredient) + 1), ingredient.Name, ingredient.Quantity * ratio, ingredient.Unit, ingredient.CalorieCount, foodGroups.GetFoodGroupName(ingredient.FoodGroupIndex));
             }
 
+            int totalCalories = CalculateTotalCalories(recipes[i].Ingredients, HandleCalorieExceeded);
+            Console.WriteLine($"\nTotal Calories: {totalCalories}");
+
+
             Console.WriteLine("\nSteps:");
             foreach (var step in recipes[i].Steps)
             {
@@ -208,6 +215,29 @@ namespace PROG6221POE
             recipes.Sort((x, y) => string.Compare(x.Name, y.Name));
         }
 
+        // Method to calculate the sum of calories from a list of ingredients
+        public int CalculateTotalCalories(List<Ingredient> ingredients, CalorieExceededHandler calorieExceededHandler)
+        {
+            int totalCalories = 0;
+            foreach (var ingredient in ingredients)
+            {
+                totalCalories += ingredient.CalorieCount;
+            }
+
+            if (totalCalories > 300)
+            {
+                // Invoke the delegate to notify the user
+                calorieExceededHandler?.Invoke();
+            }
+
+            return totalCalories;
+        }
+
+        // Define a method to handle the notification
+        public void HandleCalorieExceeded()
+        {
+            Console.WriteLine("Warning: Calorie count exceeds 300");
+        }
 
         public void ScaleRecipe()
         {
