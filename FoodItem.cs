@@ -5,16 +5,16 @@ namespace PROG6221POE
 {
     public class FoodItem
     {
-        public string name { get; set; }
-        public float quantity { get; set; }
-        public string unit { get; set; }
+        public string Name { get; set; }
+        public float Quantity { get; set; }
+        public string Unit { get; set; }
 
         // Constructor for the FoodItem class.
         public FoodItem(string name, float quantity, string unit)
         {
-            this.name = name;
-            this.quantity = quantity;
-            this.unit = unit;
+            Name = name;
+            Quantity = quantity;
+            Unit = unit;
         }
     }
 }
