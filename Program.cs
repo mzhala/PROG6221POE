@@ -33,7 +33,8 @@ class Program
             Console.WriteLine("3. Scale Recipe");
             Console.WriteLine("4. Remove Recipe");
             Console.WriteLine("5. Food Group Details");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. Calorie Counting Basicss");
+            Console.WriteLine("7. Exit");
 
             // Set the Foreground color to DarkMagenta 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -65,11 +66,15 @@ class Program
                     recipeApp.RemoveRecipe();
                     break;
                 case "5":
-                    // Call RemoveRecipe method when user chooses option 4
+                    // Call DisplayAllFoodGroupDetails method when user chooses option 5
                     foodGroups.DisplayAllFoodGroupDetails();
                     break;
                 case "6":
-                    // Exit the program when the user chooses option 5
+                    // Call DisplayCalorieCountingGuide method when user chooses option 6
+                    DisplayCalorieCountingGuide();
+                    break;
+                case "7":
+                    // Exit the program when the user chooses option 7
                     Environment.Exit(0);
                     break;
                 default:
@@ -78,5 +83,29 @@ class Program
                     break;
             }
         }
+    }
+
+    static void DisplayCalorieCountingGuide()
+    {
+        Console.WriteLine("## Calorie Counting Basics ##\n");
+
+        Console.WriteLine("### What Are Calories? ###\n");
+        Console.WriteLine("Calories are units of energy found in food and beverages. They are essential for fueling our bodies and performing daily activities.\n");
+
+        Console.WriteLine("### Expected Calorie Consumption ###\n");
+        Console.WriteLine("The recommended daily calorie intake varies based on factors such as age, gender, weight, height, and activity level.\n");
+
+        Console.WriteLine("For adult males:");
+        Console.WriteLine("- The average daily calorie intake is around 2,500 calories for maintaining weight.");
+        Console.WriteLine("- To lose weight, calorie intake may be reduced to 2,000 calories per day.");
+        Console.WriteLine("- To gain weight or build muscle, calorie intake may be increased to 3,000 calories or more per day.\n");
+
+        Console.WriteLine("For adult females:");
+        Console.WriteLine("- The average daily calorie intake is around 2,000 calories for maintaining weight.");
+        Console.WriteLine("- To lose weight, calorie intake may be reduced to 1,500 calories per day.");
+        Console.WriteLine("- To gain weight or build muscle, calorie intake may be increased to 2,500 calories or more per day.\n");
+
+        Console.WriteLine("It's important to consult with a healthcare professional or registered dietitian for personalized nutrition advice based on individual needs and goals.\n");
+
     }
 }
