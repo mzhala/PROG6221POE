@@ -212,9 +212,20 @@ namespace PROG6221POE
             }
 
             Recipe removedRecipe = recipes[index - 1];
-            recipes.RemoveAt(index - 1);
 
-            Console.WriteLine($"Recipe '{removedRecipe.Name}' removed successfully!");
+            // Confirm before removing the recipe
+            Console.Write($"Are you sure you want to remove recipe '{removedRecipe.Name}'? (Y/N): ");
+            string confirmation = Console.ReadLine().Trim().ToUpper();
+
+            if (confirmation == "Y")
+            {
+                recipes.RemoveAt(index - 1);
+                Console.WriteLine($"Recipe '{removedRecipe.Name}' removed successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Removal cancelled.");
+            }
         }
     }
 }
